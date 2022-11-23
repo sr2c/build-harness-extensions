@@ -108,6 +108,8 @@ File a GitLab [issue](https://gitlab.com/sr2c/build-harness-extensions/-/issues)
 
 ## Matrix Community
 
+[![Matrix badge](https://img.shields.io/badge/Matrix-%23dev%3Asr2.uk-blueviolet)][matrix]
+
 Join our [Open Source Community][matrix] on Matrix. It's **FREE** for everyone! This is the best place to talk shop, ask questions, solicit feedback, and work together as a community to build on our open source code.
 
 ## Contributing
@@ -204,7 +206,7 @@ Check out [our other projects][gitlab], or [hire us][website] to get support wit
   [website]: https://www.sr2.uk/?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/build-harness-extensions&utm_content=website
   [gitlab]: https://www.gitlab.com/sr2c
   [contact]: https://www.sr2.uk/
-  [matrix]: https://matrix.to/#/%!d(MISSING)ev:sr2.uk
+  [matrix]: https://matrix.to/#/%23dev:sr2.uk
   [linkedin]: https://www.linkedin.com/company/sr2uk/
   [email]: mailto:contact@sr2.uk
   [readme_header_img]: https://www.sr2.uk/readme/paid-support.png
