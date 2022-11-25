@@ -48,7 +48,7 @@ usage: |-
   lint:
   	$(SELF) terraform/install terraform/get-modules terraform/lint
   ```
-includes:
+include:
   - docs/targets.md
 contributors:
   - name: irl
