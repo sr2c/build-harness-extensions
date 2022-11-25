@@ -1,4 +1,11 @@
 
+PYTHON_TEMPLATES_DIR := "$(BUILD_HARNESS_EXTENSIONS_PATH)/templates/python"
+
+## Run bandit to detect security issues
+python/bandit: python/deps
+	pip install --quiet bandit
+	bandit -c bandit.yml -r .
+
 ## Install base dependencies with pip (from requirements.txt)
 python/deps: python/deps/base
 
@@ -20,3 +27,12 @@ python/deps/list: requirements-*.txt
 ## Install extra dependencies with pip (from requirements-%.txt)
 python/deps/%: requirements-$(word 3,$(subst /, ,$@)).txt
 	pip install -r $^
+
+## Initialise a Python project with templates
+python/init:
+	@([ -f .gitignore ] && echo ".gitignore already exists") || true
+	@[ -f .gitignore ] || cp $(PYTHON_TEMPLATES_DIR)/gitignore .gitignore
+	@([ -f .gitlab-ci.yml ] && echo ".gitlab-ci.yml already exists") || true
+	@[ -f .gitlab-ci.yml ] || cp $(PYTHON_TEMPLATES_DIR)/gitlab-ci.yml .gitlab-ci.yml
+	@([ -f bandit.yml ] && echo "bandit.yml already exists") || true
+	@[ -f bandit.yml ] || cp $(PYTHON_TEMPLATES_DIR)/bandit.yml bandit.yml
