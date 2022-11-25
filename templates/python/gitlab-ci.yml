@@ -9,3 +9,10 @@ test:bandit:
     - make init
     - make git/submodules-update  ## Requires init before target available
     - make python/bandit          ## Requires git/submodules-update before target available
+
+test:mypy:
+  stage: test
+  script:
+    - make init
+    - make git/submodules-update  ## Requires init before target available
+    - make python/mypy            ## Requires git/submodules-update before target available
