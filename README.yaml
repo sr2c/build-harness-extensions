@@ -9,7 +9,19 @@ categories:
 license: BSD2
 gitlab_repo: sr2c/build-harness-extensions
 description: |-
-  Our build harness extensions.
+  Our extensions to Cloud Posse's [build-harness](https://github.com/cloudposse/build-harness). Cloud Posse have made
+  a great collection of Makefiles to facilitate building Golang projects, Dockerfiles, Helm charts, and more. At SR2
+  Communications, our technologies sometimes differ from Cloud Posse's choice and sometimes they're the same. That's
+  why we're grateful that they've built us a way to add extensions to their framework to benefit from the existing
+  collection while also being able to work with the technologies that we work with every day.
+  
+  Our primary technologies are:
+  
+  * Ansible
+  * Docker Compose (existing Cloud Posse module)
+  * GitLab
+  * Python
+  * Terraform (existing Cloud Posse module)
 usage: |-
   Add this repository as a submodule in your existing repository:
   
