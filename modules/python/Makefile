@@ -15,7 +15,7 @@ python/deps/base:
 ## Install all dependencies with pip (from base and requirements-*.txt)
 python/deps/all: requirements.txt requirements-*.txt
 	for file in $^; do \
-		pip install -r $${file}; \
+		pip install --quiet -r $${file}; \
 	done
 
 ## List available extra dependency sets
@@ -25,8 +25,9 @@ python/deps/list: requirements-*.txt
 	done
 
 ## Install extra dependencies with pip (from requirements-%.txt)
-python/deps/%: requirements-$(word 3,$(subst /, ,$@)).txt
-	pip install -r $^
+python/deps/%:
+	([ -f requirements-$(word 3,$(subst /, ,$@)).txt ] && \
+		pip install --quiet -r requirements-$(word 3,$(subst /, ,$@)).txt) || true
 
 ## Initialise a Python project with templates
 python/init:
@@ -36,3 +37,10 @@ python/init:
 	@[ -f .gitlab-ci.yml ] || cp $(PYTHON_TEMPLATES_DIR)/gitlab-ci.yml .gitlab-ci.yml
 	@([ -f bandit.yml ] && echo "bandit.yml already exists") || true
 	@[ -f bandit.yml ] || cp $(PYTHON_TEMPLATES_DIR)/bandit.yml bandit.yml
+	@([ -f mypy.ini ] && echo "mypy.ini already exists") || true
+	@[ -f mypy.ini ] || cp $(PYTHON_TEMPLATES_DIR)/mypy.ini mypy.ini
+
+## Run mypy to detect type issues
+python/mypy: python/deps python/deps/types
+	pip install --quiet mypy
+	mypy .
