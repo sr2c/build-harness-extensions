@@ -109,10 +109,13 @@ Available targets:
   packages/reinstall                  Reinstall packages
   packages/reinstall/%                Reinstall package (e.g. helm, helmfile, kubectl)
   packages/uninstall/%                Uninstall package (e.g. helm, helmfile, kubectl)
+  python/bandit                       Run bandit to detect security issues
   python/deps                         Install base dependencies with pip (from requirements.txt)
   python/deps/%                       Install extra dependencies with pip (from requirements-%.txt)
   python/deps/all                     Install all dependencies with pip (from base and requirements-*.txt)
   python/deps/list                    List available extra dependency sets
+  python/init                         Initialise a Python project with templates
+  python/mypy                         Run mypy to detect type issues
   readme                              Alias for readme/build
   readme/build                        Create README.md by building it from README.yaml
   readme/init                         Create basic minimalistic .README.md template file
