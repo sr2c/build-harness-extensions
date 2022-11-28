@@ -245,6 +245,10 @@ Available targets:
   terraform/rewrite-required-providers Rewrite versions.tf to update existing configuration to add an explicit source attribute for each provider
   terraform/upgrade-modules           This target has not been upgraded to handle registry format
   terraform/validate                  Basic terraform sanity check
+  tflint                              Alias for tflint/{install,init,run}
+  tflint/init                         Initialise tflint
+  tflint/install                      Install terraform
+  tflint/run                          Run tflint
   travis/docker-login                 Login into docker hub
   travis/docker-tag-and-push          Tag & Push according Travis environment variables
 
