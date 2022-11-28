@@ -1,5 +1,5 @@
 
-TERRAFORM_MODULES_TEMPLATES_DIR := "$(BUILD_HARNESS_EXTENSIONS_PATH)/templates/python"
+TERRAFORM_MODULE_TEMPLATES_DIR := "$(BUILD_HARNESS_EXTENSIONS_PATH)/templates/terraform-module"
 
 ## Initialise a Terraform module with templates
 tfmodule/init:
