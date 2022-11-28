@@ -140,6 +140,7 @@ Available targets:
   tflint/init                         Initialise tflint
   tflint/install                      Install terraform
   tflint/run                          Run tflint
+  tfmodule/init                       Initialise a Terraform module with templates
   travis/docker-login                 Login into docker hub
   travis/docker-tag-and-push          Tag & Push according Travis environment variables
 
