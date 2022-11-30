@@ -58,7 +58,7 @@ usage: |-
 
   ## Lint terraform code
   lint:
-  	$(SELF) terraform/install terraform/get-modules terraform/lint
+  	$(SELF) terraform/install terraform/get-modules terraform/lint terraform/validate tflint
   ```
 include:
   - docs/targets.md
