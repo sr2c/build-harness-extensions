@@ -1,9 +1,12 @@
 
-TERRAFORM_MODULE_TEMPLATES_DIR := "$(BUILD_HARNESS_EXTENSIONS_PATH)/templates/terraform-module"
+TERRAFORM_MODULE_TEMPLATES_DIR := $(BUILD_HARNESS_EXTENSIONS_PATH)/templates/terraform-module
+TERRAFORM_MODULE_TEMPLATES_DOTFILES := $(filter-out .,$(filter-out ..,$(notdir $(wildcard $(TERRAFORM_MODULE_TEMPLATES_DIR)/.*))))
+TERRAFORM_MODULE_TEMPLATES_FILES := $(wildcard $(TERRAFORM_MODULE_TEMPLATES_DIR)/*) $(TERRAFORM_MODULE_TEMPLATES_DOTFILES)
 
 ## Initialise a Terraform module with templates
 tfmodule/init:
-	@([ -f .gitlab-ci.yml ] && echo ".gitlab-ci.yml already exists") || true
-	@[ -f .gitlab-ci.yml ] || cp $(TERRAFORM_MODULE_TEMPLATES_DIR)/.gitlab-ci.yml .gitlab-ci.yml
-	@([ -f .tflint.hcl ] && echo ".tflint.hcl already exists") || true
-	@[ -f .tflint.hcl ] || cp $(TERRAFORM_MODULE_TEMPLATES_DIR)/.tflint.hcl .tflint.hcl
+	@for FILE in $(TERRAFORM_MODULE_TEMPLATES_FILES); do \
+		([ -f $$FILE ] && echo "$$FILE already exists") || true; \
+		[ -f $$FILE ] || cp $(TERRAFORM_MODULE_TEMPLATES_DIR)/$$FILE $$FILE; \
+	done
+
