@@ -1,6 +1,6 @@
 {{- defineDatasource "config" .Env.README_YAML | regexp.Replace ".*" "" -}}
 {{- defineDatasource "includes" .Env.README_INCLUDES | regexp.Replace ".*" "" -}}
-{{- $deprecated := has (ds "config") "deprecated" }}
+{{- $deprecated := has (ds "config") "deprecated"}}
 <!-- markdownlint-disable -->
 {{- if $deprecated }}
 # (deprecated) {{(ds "config").name}}{{ if gt (len (ds "config").name) 23 }}{{ print "\n\n" }}{{ end }}
@@ -15,9 +15,9 @@
 {{- end }}
 <!-- markdownlint-restore -->
 
-[![README Header][readme_header_img]][readme_header_link]
+<!-- [![README Header][readme_header_img]][readme_header_link] -->
 
-[![SR2 Communications Limited][logo]](https://www.sr2.uk/)
+[![The Guardian][logo]][website]
 
 <!--
 
@@ -83,6 +83,9 @@ It's 100% Open Source and licensed under the [Internet Systems Consortium](LICEN
 {{ end }}
 {{ if eq (ds "config").license "GPL3" }}
 It's 100% Open Source and licensed under the [GNU General Public License](LICENSE).
+{{ end }}
+{{ if eq (ds "config").license "AGPL3" }}
+It's free and open source made available under the the [GNU Affero General Public v3 License](LICENSE.md).
 {{ end }}
 {{ if eq (ds "config").license "BSD2" }}
 It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
@@ -171,13 +174,13 @@ For additional context, refer to some of these links.
 
 File a GitLab [issue]({{ printf "https://gitlab.com/%s/-/issues" (ds "config").gitlab_repo}}), send us an [email][email] or join our [Matrix Community][matrix].
 
-[![README Commercial Support][readme_commercial_support_img]][readme_commercial_support_link]
-
 ## Matrix Community
 
-[![Matrix badge](https://img.shields.io/badge/Matrix-%23dev%3Asr2.uk-blueviolet)][matrix]
+[![Matrix badge](https://img.shields.io/badge/Matrix-%23guardianproject%3Amatrix.org-blueviolet)][matrix]
 
-Join our [Open Source Community][matrix] on Matrix. It's **FREE** for everyone! This is the best place to talk shop, ask questions, solicit feedback, and work together as a community to build on our open source code.
+Join our [Open Source Community][matrix] on Matrix. It's **FREE** for everyone!
+This is the best place to talk shop, ask questions, solicit feedback, and work
+together as a community to build on our open source code.
 
 {{ if not $deprecated -}}
 ## Contributing
@@ -210,7 +213,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 {{ else }}
 ## Copyright
 
-Copyright © 2021-{{ time.Now.Year }} SR2 Communications Limited
+Copyright © 2021-{{ time.Now.Year }} The Guardian Project
 {{ end }}
 
 {{ if eq (ds "config").license "APACHE2" }}
@@ -331,6 +334,30 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 {{ end }}
 
+{{ if eq (ds "config").license "AGPL3" }}
+## License
+
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.en.html)
+
+```text
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+```
+{{ end }}
+
 {{ if eq (ds "config").license "BSD2" }}
 ## License
 
@@ -362,52 +389,35 @@ All other trademarks referenced herein are the property of their respective owne
 
 ## About
 
-This project is maintained by [SR2 Communications Limited][website].
+This project is maintained by [The Guardian Project][website].
 
-[![SR2 Communications Limited][logo]][website]
+[![The Guardian Project][logo]][website]
 
-We're a [DevOps services][website] company based in Aberdeen, Scotland. We ❤️ open source software and
-specialise in digital human rights and humanitarian projects.
+We're a [collective of designers, developers, and ops][website] folk focused on useable
+privacy and security with a focus on digital human rights and humanitarian projects.
 
-We offer [paid support][website] on all of our projects.
+Everything we do is 100% FOSS. 
 
-Check out [our other projects][gitlab], or [hire us][website] to get support with using our projects.
+Follow us on [mastadon][mastadon] or [twitter][twitter], [apply for a job][join], or
+[partner with us][partner].
 
-## Trans Rights
+We offer [paid support][contact] on all of our projects.
 
-![Trans Rights Are Human Rights][trans_rights]
+Check out [our other devops projects][gitlab] or our [entire other set of
+projects][nonops] related to privacy and security related software, or [hire
+us][website] to get support with using our projects.
 
-Trans is an umbrella term to describe people whose gender is not the same as, or does not sit comfortably with, the
-sex they were assigned at birth. *Like all people*, they have the right to be treated with dignity and respect and to
-have their human rights protected.
+{{- if eq (index (ds "config") "funded_by_cdr") true }}
+**This project is also funded by the [Center for Digital Resilience][cdr].**
 
-Transgender people face significant discrimination and prejudice in many areas of their lives, including employment,
-education, housing, and healthcare. They are also at increased risk of violence and hate crimes. These issues
-can have a serious impact on the physical and mental well-being of transgender people and can prevent them from fully
-participating in society.
+[<img src="https://gitlab.com/digiresilience/web/digiresilience.org/-/raw/master/assets/images/cdr-logo-gray-256w.png"/>][website]
 
-Transgender rights are therefore an important part of the broader struggle for human rights. Everyone, regardless of
-their gender identity, should be able to live their lives free from discrimination and to enjoy the same rights and
-opportunities as everyone else. This includes the right to express their gender identity and to be treated with respect
-and dignity.
+CDR builds [resilient systems][cdr-tech] to keep civil society safe online and empowers
+activists to regain civic space. We offer a variety of digital wellness
+services through local partner organizations. Interested? [Email
+us][cdr-email].
 
-It is important for society to recognize and respect the rights of transgender people, and to take steps to address the
-discrimination and prejudice that they face. This can include supporting policies and laws that protect transgender
-people from discrimination and promoting acceptance and understanding of transgender people within the broader
-community.
-
-* [Gendered Intelligence](https://genderedintelligence.co.uk/) is a trans-led and trans-involving grassroots organisation
-  with a wealth of lived experience, community connections of many kinds, and a depth and breadth of trans community
-  knowledge. They offer staff training, consultancy, youth work, mentoring and undertake public engagement activities.
-
-* [TransAid Cymru](https://transaid.cymru/) began life as a local mutual aid group in Cardiff. Tired of the ways that the
-  electoral political system had let the trans community down, they decided it was time to do something for themselves.
-  Many of the founding members were disabled and unemployed. Familiar with the real, material needs of the trans
-  community and how little support there was out there, they founded the mutual aid group in order to provide the services
-  the trans community needed.
-
-If you have the means and you have benefited from this open source project, please consider making a donation to either
-(or both) of the above groups.
+{{ end }}
 
 {{ if has (datasource "config") "contributors" }}
 ## Contributors
@@ -435,16 +445,24 @@ If you have the means and you have benefited from this open source project, plea
 {{- $utm_link := printf "%%s?utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" "gitlab" "readme" (ds "config").gitlab_repo "%s" -}}
 
 <!-- markdownlint-disable -->
-  [logo]: https://www.sr2.uk/readme/logo.png
-  [website]: {{ printf $utm_link "https://www.sr2.uk/" "website" }}
-  [gitlab]: {{ printf "https://www.gitlab.com/sr2c" }}
-  [contact]: {{ printf "https://www.sr2.uk/" }}
-  [matrix]: {{ printf "https://matrix.to/#/%%23dev:sr2.uk" }}
-  [linkedin]: {{ printf "https://www.linkedin.com/company/sr2uk/" }}
-  [email]: {{ printf "mailto:contact@sr2.uk" }}
-  [readme_header_img]: {{ printf "https://www.sr2.uk/readme/paid-support.png" }}
-  [readme_header_link]: {{ printf $utm_link "https://www.sr2.uk/" "readme_header_link" }}
+  [website]: {{ printf $utm_link "https://guardianproject.info/" "website" }}
+  [gitlab]: {{ printf "https://www.gitlab.com/guardianproject-ops" }}
+  [contact]: {{ printf "https://guardianproject.info/contact/" }}
+  [matrix]: {{ printf "https://matrix.to/#/%%23guardianproject:matrix.org" }}
+  [readme_header_img]: {{ printf "https://gitlab.com/guardianproject/guardianprojectpublic/-/raw/master/Graphics/GuardianProject/pngs/logo-color-w256.png" }}
+  [readme_header_link]: {{ printf $utm_link "https://guardianproject.info" "readme_header_link" }}
   [readme_commercial_support_img]: {{ printf "https://www.sr2.uk/readme/paid-support.png" }}
   [readme_commercial_support_link]: {{ printf $utm_link "https://www.sr2.uk/" "readme_commercial_support_link" }}
-  [trans_rights]: https://img.shields.io/badge/Trans%20Rights-Human%20Rights-lightblue?logo=data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADVJREFUeNpijD73i4EUwMRAIiBZA+PXlTsGm5P+//8/yJzE8m3VzkHmJNL9kKbqNMicBBBgAM3lCr5JiK9jAAAAAElFTkSuQmCC
+  [partner]: https://guardianproject.info/how-you-can-work-with-us/
+  [nonops]: https://gitlab.com/guardianproject
+  [mastadon]: https://social.librem.one/@guardianproject
+  [twitter]: https://twitter.com/guardianproject
+  [email]: mailto:support@guardianproject.info
+  [join_email]: mailto:jobs@guardianproject.info
+  [join]: https://guardianproject.info/contact/join/
+  [logo_square]: https://assets.gitlab-static.net/uploads/-/system/group/avatar/3262938/guardianproject.png?width=88
+  [logo]: https://gitlab.com/guardianproject/guardianprojectpublic/-/raw/master/Graphics/GuardianProject/pngs/logo-color-w256.png
+  [logo_black]: https://gitlab.com/guardianproject/guardianprojectpublic/-/raw/master/Graphics/GuardianProject/pngs/logo-black-w256.png
+  [cdr]: https://digiresilience.org
+  [cdr-tech]: https://digiresilience.org/tech/
 <!-- markdownlint-restore -->
