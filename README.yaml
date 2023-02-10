@@ -23,11 +23,6 @@ description: |-
   * Python
   * Terraform (existing Cloud Posse module)
 usage: |-
-  Add this repository as a submodule in your existing repository:
-  
-  ```bash
-  git submodule add https://gitlab.com/sr2c/build-harness-extensions.git
-  ```
   
   ### Simple usage
   
@@ -38,7 +33,7 @@ usage: |-
 
   export README_TEMPLATE_FILE ?= build-harness-extensions/templates/README.md.gotmpl
 
-  -include $(shell curl -sSL -o .build-harness "https://cloudposse.tools/build-harness"; echo .build-harness)
+  -include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/feat/install-script/Makefile.bootstrap"; echo .build-harness-ext)
   ```
   
   ### Terraform module
@@ -54,7 +49,7 @@ usage: |-
   # List of targets the `readme` target should call before generating the readme
   export README_DEPS ?= docs/targets.md docs/terraform.md
 
-  -include $(shell curl -sSL -o .build-harness "https://cloudposse.tools/build-harness"; echo .build-harness)
+  -include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/feat/install-script/Makefile.bootstrap"; echo .build-harness-ext)
 
   ## Lint terraform code
   lint:
@@ -66,3 +61,6 @@ contributors:
   - name: irl
     gitlab: irlxyz
     gitlab_id: 5895869
+  - name: Abel Luck
+    gitlab: abelxluck
+    gravatar: 0f605397e0ead93a68e1be26dc26481a

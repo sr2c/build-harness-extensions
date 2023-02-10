@@ -64,11 +64,6 @@ It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
 
 
 
-Add this repository as a submodule in your existing repository:
-
-```bash
-git submodule add https://gitlab.com/sr2c/build-harness-extensions.git
-```
 
 ### Simple usage
 
@@ -79,7 +74,7 @@ SHELL := /bin/bash
 
 export README_TEMPLATE_FILE ?= build-harness-extensions/templates/README.md.gotmpl
 
--include $(shell curl -sSL -o .build-harness "https://cloudposse.tools/build-harness"; echo .build-harness)
+-include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/feat/install-script/Makefile.bootstrap"; echo .build-harness-ext)
 ```
 
 ### Terraform module
@@ -95,7 +90,7 @@ export README_TEMPLATE_FILE ?= build-harness-extensions/templates/README.md.gotm
 # List of targets the `readme` target should call before generating the readme
 export README_DEPS ?= docs/targets.md docs/terraform.md
 
--include $(shell curl -sSL -o .build-harness "https://cloudposse.tools/build-harness"; echo .build-harness)
+-include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/feat/install-script/Makefile.bootstrap"; echo .build-harness-ext)
 
 ## Lint terraform code
 lint:
@@ -390,12 +385,14 @@ If you have the means and you have benefited from this open source project, plea
 ## Contributors
 
 <!-- markdownlint-disable -->
-|  [![irl][irlxyz_avatar]][irlxyz_homepage]<br/>[irl][irlxyz_homepage] |
-|---|
+|  [![irl][irlxyz_avatar]][irlxyz_homepage]<br/>[irl][irlxyz_homepage] | [![Abel Luck][abelxluck_avatar]][abelxluck_homepage]<br/>[Abel Luck][abelxluck_homepage] |
+|---|---|
 <!-- markdownlint-restore -->
 
   [irlxyz_homepage]: https://gitlab.com/irlxyz
   [irlxyz_avatar]: https://gitlab.com/uploads/-/system/user/avatar/5895869/avatar.png?width=130
+  [abelxluck_homepage]: https://gitlab.com/abelxluck
+  [abelxluck_avatar]: https://gitlab.com/uploads/-/system/user/avatar/941123/avatar.png?width=130
 
 <!-- markdownlint-disable -->
   [logo]: https://www.sr2.uk/readme/logo.png

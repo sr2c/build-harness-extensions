@@ -1,0 +1,30 @@
+#  Use a guard variable to prevent infinite recursive includes
+ifeq ($(BUILD_HARNESS_EXT_TEMPLATES_MAKEFILE_GUARD),)
+BUILD_HARNESS_EXT_TEMPLATES_MAKEFILE_GUARD := included
+
+# include upstream build-harness
+-include $(shell curl -sSL -o .build-harness "https://cloudposse.tools/build-harness"; echo .build-harness)
+
+export BUILD_HARNESS_EXT_ORG ?= sr2c
+export BUILD_HARNESS_EXT_PROJECT ?= build-harness-extensions
+export BUILD_HARNESS_EXT_BRANCH ?= main
+
+# Resolves BUILD_HARNESS_EXTENSIONS_PATH to BUILD_HARNESS_EXTENSIONS_PATH_LOCAL when BUILD_HARNESS_EXTENSIONS_PATH does not exist
+BUILD_HARNESS_EXTENSIONS_PATH ?= $(shell until [ -d "$(BUILD_HARNESS_EXT_PROJECT)" ] || [ "`pwd`" == '/' ]; do cd ..; done; pwd)/$(BUILD_HARNESS_EXT_PROJECT)
+BUILD_HARNESS_EXTENSIONS_PATH_LOCAL := $(PWD)/$(BUILD_HARNESS_EXT_PROJECT)
+export BUILD_HARNESS_EXTENSIONS_PATH := $(or $(wildcard $(BUILD_HARNESS_EXTENSIONS_PATH)),$(BUILD_HARNESS_EXTENSIONS_PATH_LOCAL))
+
+# Macro to clone/install BUILD_HARNESS_PROJECT
+define harness_ext_install
+curl --retry 5 --fail --silent --retry-delay 1 \
+	https://gitlab.com/$(BUILD_HARNESS_EXT_ORG)/$(BUILD_HARNESS_EXT_PROJECT)/-/raw/$(BUILD_HARNESS_EXT_BRANCH)/bin/install.sh | \
+	bash -s "$(BUILD_HARNESS_EXT_ORG)" "$(BUILD_HARNESS_EXT_PROJECT)" "$(BUILD_HARNESS_EXT_BRANCH)"
+endef
+
+
+.PHONY : init
+## Init build-harness
+init::
+	$(harness_ext_install)
+
+endif
