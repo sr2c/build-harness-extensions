@@ -74,12 +74,39 @@ SHELL := /bin/bash
 
 export README_TEMPLATE_FILE ?= build-harness-extensions/templates/README.md.gotmpl
 
--include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/feat/install-script/Makefile.bootstrap"; echo .build-harness-ext)
+-include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/main/Makefile.bootstrap"; echo .build-harness-ext)
 ```
+
+### Ansible collection
+
+You can add additional variables to adjust the behaviour of the targets, for an Ansible module for example:
+
+```make
+SHELL := /bin/bash
+
+export README_TEMPLATE_FILE ?= $(BUILD_HARNESS_EXTENSIONS_PATH)/templates/README.md.gotmpl
+
+export README_DEPS ?= docs/ansible.md docs/targets.md
+
+-include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/main/Makefile.bootstrap"; echo .build-harness-ext)
+```
+
+### Ansible role
+
+You do not need to add a complete new Makefile for an Ansible role that is part of a collection, simply add a
+Makefile to include the Makefile of the collection:
+
+```make
+include ../../Makefile
+```
+
+build-harness will automatically discover the path for the build-harness and build-harness-extensions directories.
 
 ### Terraform module
 
-You can add additional variables to adjust the behaviour of the targets, for a Terraform module for example:
+Project specific targets may be added to the Makefile. Document the additional targets using two # signs to have
+the target automatically documented in the README. Use the HELP_FILTER variable to limit the help target to showing
+only the relevant targets for the project:
 
 ```make
 SHELL := /bin/bash
@@ -90,7 +117,7 @@ export README_TEMPLATE_FILE ?= build-harness-extensions/templates/README.md.gotm
 # List of targets the `readme` target should call before generating the readme
 export README_DEPS ?= docs/targets.md docs/terraform.md
 
--include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/feat/install-script/Makefile.bootstrap"; echo .build-harness-ext)
+-include $(shell curl -sSL -o .build-harness-ext "https://gitlab.com/sr2c/build-harness-extensions/-/raw/main/Makefile.bootstrap"; echo .build-harness-ext)
 
 ## Lint terraform code
 lint:
