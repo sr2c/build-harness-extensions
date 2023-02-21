@@ -135,7 +135,7 @@ def document_collection():
         role_names = sorted(collection.roles.keys())
         for role_name in role_names:
             role_name_parts = role_name.split(".")
-            print(f"| [{role_name}](./roles/{role_name[2]}) | {collection.roles[role_name]} |")
+            print(f"| [{role_name}](./roles/{role_name_parts[2]}) | {collection.roles[role_name]} |")
         print()
 
     if collection.playbooks:
