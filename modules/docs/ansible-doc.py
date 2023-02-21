@@ -1,18 +1,28 @@
 #!/usr/bin/env python3
 
 import glob
+import os
 import re
-from typing import Dict
+from typing import Any, Dict, List
 
-ANSIBLE_FILE_PATTERNS = [
+import yaml
+
+RE_VARIABLE_LINE = re.compile(r".*#\s*\@var\s+([^:]+):\s+([^#]*)#\s*(.*)\s*")
+RE_TAG_LINE = re.compile(r".*#\s*\@tag\s+([^#]+)#\s*(.*)\s*")
+
+ROLE_FILE_PATTERNS = [
     "defaults/**/*.yml",
     "handlers/**/*.yml",
     "tasks/**/*.yml",
     "vars/**/*.yml",
 ]
 
-RE_VARIABLE_LINE = re.compile(r".*#\s*\@var\s+([^:]+):\s+([^#]*)#\s*(.*)\s*")
-RE_TAG_LINE = re.compile(r".*#\s*\@tag\s+([^#]+)#\s*(.*)\s*")
+
+def find_all_role_files() -> List[str]:
+    files = []
+    for pattern in ROLE_FILE_PATTERNS:
+        files.extend(glob.glob(pattern, recursive=True))
+    return files
 
 
 class AnsibleRole:
@@ -23,13 +33,17 @@ class AnsibleRole:
         self.tags = {}
         self.vars = {}
 
-    def parse_file(self, filename):
+    def parse(self):
+        for filename in find_all_role_files():
+            self._parse_file(filename)
+
+    def _parse_file(self, filename: str) -> None:
         with open(filename) as handle:
             lines = handle.readlines()
             for line in lines:
                 self._parse_line(line)
 
-    def _parse_line(self, line):
+    def _parse_line(self, line: str) -> None:
         if matches := RE_VARIABLE_LINE.match(line):
             var_name, var_default, var_description = matches.groups()
             var_name = var_name.strip()
@@ -47,18 +61,9 @@ class AnsibleRole:
             self.tags[tag_name] = tag_description
 
 
-def find_all_ansible_filenames():
-    files = []
-    for pattern in ANSIBLE_FILE_PATTERNS:
-        files.extend(glob.glob(pattern, recursive=True))
-    return files
-
-
-if __name__ == "__main__":
-    ansible_filenames = find_all_ansible_filenames()
+def document_role():
     role = AnsibleRole()
-    for filename in ansible_filenames:
-        role.parse_file(filename)
+    role.parse()
 
     if role.vars:
         print("## Role Variables")
@@ -75,6 +80,7 @@ if __name__ == "__main__":
             else:
                 var_default = f"`{var_default}`"
             print(f"| {var_name} | {var_default} | {role.vars[var_name][1]} |")
+        print()
 
     if role.tags:
         print("## Role Tags")
@@ -84,3 +90,68 @@ if __name__ == "__main__":
         tag_names = sorted(role.tags.keys())
         for tag_name in tag_names:
             print(f"| {tag_name} | {role.tags[tag_name][0]} |")
+        print()
+
+
+class AnsibleCollection:
+    galaxy: Dict[str, Any]
+    roles: Dict[str, str]
+    playbooks: Dict[str, str]
+
+    def __init__(self):
+        self.galaxy = yaml.safe_load(open("galaxy.yml"))
+        self.roles = {}
+        self.playbooks = {}
+
+    def discover_roles(self):
+        for role_metadata_filename in glob.glob("roles/*/meta/main.yml"):
+            filename_parts = role_metadata_filename.split("/")
+            role_metadata = yaml.safe_load(open(role_metadata_filename))
+            description = role_metadata["galaxy_info"]["description"]
+            self.roles[f"{self.galaxy['namespace']}.{self.galaxy['name']}.{filename_parts[1]}"] = description
+
+    def discover_playbooks(self):
+        for playbook_metadata_filename in glob.glob("playbooks/*.yml"):
+            playbook_name = playbook_metadata_filename.split("/")[1][:-4]
+            playbook = yaml.safe_load(open(playbook_metadata_filename))
+            description = "*TODO*"
+            try:
+                description = playbook[0]["name"]
+            except (IndexError, KeyError):
+                pass
+            self.playbooks[f"{self.galaxy['namespace']}.{self.galaxy['name']}.{playbook_name}"] = description
+
+
+def document_collection():
+    collection = AnsibleCollection()
+    collection.discover_roles()
+    collection.discover_playbooks()
+
+    if collection.roles:
+        print("## Roles")
+        print()
+        print("| Role Name    | Description  |")
+        print("| ------------ | ------------ |")
+        role_names = sorted(collection.roles.keys())
+        for role_name in role_names:
+            print(f"| [{role_name}](./roles/{role_name}) | {collection.roles[role_name]} |")
+        print()
+
+    if collection.playbooks:
+        print("## Playbooks")
+        print()
+        print("| Playbook Name    | Description  |")
+        print("| ---------------- | ------------ |")
+        playbook_names = sorted(collection.playbooks.keys())
+        for playbook_name in playbook_names:
+            print(f"| [{playbook_name}](./playbooks/{playbook_name}.yml) | {collection.playbooks[playbook_name]} |")
+        print()
+
+
+if __name__ == "__main__":
+    if os.path.isfile("tasks/main.yml"):
+        document_role()
+    elif os.path.isfile("galaxy.yml"):
+        document_collection()
+    else:
+        raise RuntimeError("This isn't a role or a collection so I don't know how to document it.")
