@@ -47,6 +47,7 @@ Available targets:
   docs/github-action.md               Update `docs/github-action.md` from `action.yaml`
   docs/github-actions-reusable-workflows.md Update `docs/github-actions-reusable-workflows.md` from `.github/workflows/*.yaml`
   docs/targets.md                     Update `docs/targets.md` from `make help`
+  docs/terraform-split.md             Generate documentation for a Terraform module, splitting out inputs relating to cloudposse/label/null
   docs/terraform.md                   Update `docs/terraform.md` from `terraform-docs`
   geodesic/deploy                     Run a Jenkins Job to Deploy $(APP) with $(CANONICAL_TAG)
   git/aliases-update                  Update git aliases
@@ -61,9 +62,8 @@ Available targets:
   go/build                            Build binary
   go/build-all                        Build binary for all platforms
   go/clean                            Clean compiled binary
-  go/clean-all                        Clean compiled binary and dependency
+  go/clean-all                        Clean compiled binary and dependencies
   go/deps                             Install dependencies
-  go/deps-build                       Install dependencies for build
   go/deps-dev                         Install development dependencies
   go/fmt                              Format code according to Golang convention
   go/install                          Install cli
@@ -105,10 +105,10 @@ Available targets:
   init                                Init build-harness
   jenkins/run-job-with-tag            Run a Jenkins Job with $(TAG)
   make/lint                           Lint all makefiles
-  packages/delete                     Delete packages
-  packages/install                    Install packages 
+  packages/delete                     Delete local copy of packages repository
+  packages/install                    Download packages repository
   packages/install/%                  Install package (e.g. helm, helmfile, kubectl)
-  packages/reinstall                  Reinstall packages
+  packages/reinstall                  Reinstall local copy of packages repository
   packages/reinstall/%                Reinstall package (e.g. helm, helmfile, kubectl)
   packages/uninstall/%                Uninstall package (e.g. helm, helmfile, kubectl)
   python/bandit                       Run bandit to detect security issues
@@ -130,12 +130,15 @@ Available targets:
   template/build                      Create $OUT file by building it from $IN template file
   template/deps                       Install dependencies
   terraform/bump-tf-12-min-version    Rewrite versions.tf to bump modules with minimum core version of '0.12.x' to '>= 0.12.26'
+  terraform/fmt                       Format terraform
   terraform/get-modules               (Obsolete) Ensure all modules can be fetched
   terraform/get-plugins               (Obsolete) Ensure all plugins can be fetched
   terraform/install                   Install terraform
-  terraform/lint                      Lint check Terraform
+  terraform/lint                      Format check terraform
   terraform/loosen-constraints        and convert "~>" constraints to ">=".
+  terraform/precommit                 Terraform pull-request routine check/update
   terraform/rewrite-required-providers Rewrite versions.tf to update existing configuration to add an explicit source attribute for each provider
+  terraform/tflint                    Lint terraform (with tflint)
   terraform/upgrade-modules           This target has not been upgraded to handle registry format
   terraform/validate                  Basic terraform sanity check
   tflint                              Alias for tflint/{install,init,run}
