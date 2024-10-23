@@ -1,5 +1,5 @@
-{{- defineDatasource "config" .Env.README_YAML | regexp.Replace ".*" "" -}}
-{{- defineDatasource "includes" .Env.README_INCLUDES | regexp.Replace ".*" "" -}}
+{{- defineDatasource "config" .Env.README_YAML -}}
+{{- defineDatasource "includes" (env.Getenv "README_INCLUDES") -}}
 {{- $deprecated := has (ds "config") "deprecated"}}
 <!-- markdownlint-disable -->
 {{- if $deprecated }}
@@ -396,14 +396,14 @@ This project is maintained by [The Guardian Project][website].
 We're a [collective of designers, developers, and ops][website] folk focused on useable
 privacy and security with a focus on digital human rights and humanitarian projects.
 
-Everything we do is 100% FOSS. 
+Everything we do is 100% FOSS.
 
-Follow us on [mastadon][mastadon] or [twitter][twitter], [apply for a job][join], or
+Follow us on [Mastodon][mastodon] or [twitter][twitter], [apply for a job][join], or
 [partner with us][partner].
 
 We offer [paid support][contact] on all of our projects.
 
-Check out [our other devops projects][gitlab] or our [entire other set of
+Check out [our other DevOps projects][gitlab] or our [entire other set of
 projects][nonops] related to privacy and security related software, or [hire
 us][website] to get support with using our projects.
 
@@ -455,7 +455,7 @@ us][cdr-email].
   [readme_commercial_support_link]: {{ printf $utm_link "https://www.sr2.uk/" "readme_commercial_support_link" }}
   [partner]: https://guardianproject.info/how-you-can-work-with-us/
   [nonops]: https://gitlab.com/guardianproject
-  [mastadon]: https://social.librem.one/@guardianproject
+  [mastodon]: https://social.librem.one/@guardianproject
   [twitter]: https://twitter.com/guardianproject
   [email]: mailto:support@guardianproject.info
   [join_email]: mailto:jobs@guardianproject.info
