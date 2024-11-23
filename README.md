@@ -176,6 +176,8 @@ Available targets:
   docker/image/promote/remote         Pull $SOURCE_DOCKER_REGISTRY/$IMAGE_NAME:$SOURCE_VERSION and promote to $TARGET_DOCKER_REGISTRY/$IMAGE_NAME:$TARGET_VERSION
   docker/image/push                   Push $TARGET_DOCKER_REGISTRY/$IMAGE_NAME:$TARGET_VERSION
   docker/login                        Login into docker hub
+  docker/login/gitlab                 When in Gitlab CI, login to the current repo's container registry
+  docker/push                         Push $DOCKER_IMAGE_NAME
   docs/ansible.md                     Generate documentation for an Ansible collection or role
   docs/copyright-add                  Add copyright headers to source code
   docs/github-action.md               Update `docs/github-action.md` from `action.yaml`
