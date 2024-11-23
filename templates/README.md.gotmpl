@@ -1,5 +1,5 @@
 {{- defineDatasource "config" .Env.README_YAML -}}
-{{- defineDatasource "includes" (env.Getenv "README_INCLUDES") -}}
+{{- defineDatasource "includes" "./" -}}
 {{- $deprecated := has (ds "config") "deprecated" }}
 <!-- markdownlint-disable -->
 {{- if $deprecated }}
