@@ -281,16 +281,17 @@ Like this project? Please give it a ★ on
 
 File a
 [GitLab issue](https://gitlab.com/sr2c/build-harness-extensions/-/issues),
-send us an [email][email] or join our [Matrix Community][matrix].
+send us an [email][email] or join our [IRC](#irc).
 
 [![README Commercial Support][readme_commercial_support_img]][readme_commercial_support_link]
 
-## Matrix Community
+## IRC
 
-[![Matrix badge](https://img.shields.io/badge/Matrix-%23dev%3Asr2.uk-blueviolet?style=flat-square)][matrix]
+[![IRC badge](https://img.shields.io/badge/libera.chat-%23sr2-blueviolet?style=flat-square)][irc]
 
-Join our [Open Source Community][matrix] on Matrix.
-It's **FREE** for everyone!
+Join our [public chat][irc] on IRC.
+If you don't have an IRC client already, you can get started with the
+[web client](https://web.libera.chat/#sr2).
 This is the best place to talk shop, ask questions, solicit feedback, and work
 together as a community to build on our open source code.
 
@@ -392,7 +393,7 @@ with using our projects.
   [website]: https://www.sr2.uk/?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/build-harness-extensions&utm_content=website
   [gitlab]: https://go.sr2.uk/gitlab?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/build-harness-extensions&utm_content=gitlab
   [contact]: https://go.sr2.uk/contact?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/build-harness-extensions&utm_content=contact
-  [matrix]: https://go.sr2.uk/matrix?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/build-harness-extensions&utm_content=matrix
+  [irc]: ircs://libera.chat/sr2
   [linkedin]: https://www.linkedin.com/company/sr2uk/
   [email]: mailto:contact@sr2.uk
   [readme_header_img]: https://www.sr2.uk/readme/paid-support.png
