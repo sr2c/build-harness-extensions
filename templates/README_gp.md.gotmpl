@@ -1,6 +1,7 @@
 {{- defineDatasource "config" .Env.README_YAML -}}
 {{- defineDatasource "includes" "./" -}}
 {{- $deprecated := has (ds "config") "deprecated"}}
+{{- $translated := has (ds "config") "weblate_component" }}
 <!-- markdownlint-disable -->
 {{- if $deprecated }}
 # (deprecated) {{(ds "config").name}}{{ if gt (len (ds "config").name) 23 }}{{ print "\n\n" }}{{ end }}
@@ -202,13 +203,53 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
  5. Submit a **Pull Request** so that we can review your changes
 
 **NOTE:** Be sure to merge the latest changes from "upstream" before making a pull request!
+
+{{- if $translated }}
+### Translations
+
+Our translation project is publicly available
+[over on Weblate](https://hosted.weblate.org/projects/{{ (ds "config").weblate_component }}).
+
+The first thing you will need to do in order to contribute is to create a free Weblate account
+[on this page](https://hosted.weblate.org/accounts/register/). More information about profile settings can be found
+[here](https://docs.weblate.org/en/latest/user/profile.html).
+
+Once you are signed in to Weblate, you can navigate to the
+[{{ (ds "config").name }} component](https://hosted.weblate.org/projects/{{ (ds "config").weblate_component }}).
+Here, you should see the different existing languages that can be found on the website.
+
+Select the language that you want to contribute to.
+The most straight forward option then is to click on the "Translate" button on the top right (in the Translation status
+section).
+This will automatically bring you to the translation interface for untranslated strings.
+
+Type your translation in the text box at the top and then, once you are happy with it, you either press Save and
+continue (to save the translation and go to the next untranslated string), Save and stay (to save the translation and
+stay on the same page), Suggest (to add your translation to suggestions for other users to view), or Skip (to go to the
+next untranslated string without saving anything).
+
+In order to help with the translations, you can see on the bottom the Nearby strings, the Comments (from other
+contributors), the Automatic suggestions (from machine translation engines), the translations in Other languages, and
+the History of translations for this string.
+
+On the right, under the String information section, you can also click the link under Source string location in order
+to view the source of the doc file containing the string.
+
+For more information about translating using Weblate, you can check out
+[this in-depth guide](https://docs.weblate.org/en/latest/user/translating.html).
+
+If you want to add a new language, please first have to contact us, either on [Matrix][matrix], by [email][email], or
+by [opening an issue]({{ printf "https://gitlab.com/%s/-/issues" (ds "config").gitlab_repo}}).
+
+![translation status per language](https://hosted.weblate.org/widget/guardianproject/snaptshot-telegram-bot/multi-blue.svg)
+{{- end }}
 {{ end }}
 {{ if has (ds "config") "copyrights" }}
 
 ## Copyrights
 
 {{ range $copyright := (ds "config").copyrights -}}
-{{ printf "Copyright © %s-%d [%s](%s)\n" $copyright.year time.Now.Year $copyright.name $copyright.url }}
+{{ printf "Copyright © %d-%d [%s](%s)\n" $copyright.year time.Now.Year $copyright.name $copyright.url }}
 {{ end }}
 {{ else }}
 ## Copyright
