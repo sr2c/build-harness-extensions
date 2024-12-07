@@ -251,19 +251,18 @@ by [opening an issue]({{ printf "https://gitlab.com/%s/-/issues" (ds "config").g
 ![translation status per language](https://hosted.weblate.org/widget/guardianproject/snaptshot-telegram-bot/multi-blue.svg)
 {{- end }}
 {{- end }}
+
 {{- if has (ds "config") "copyrights" }}
 ## Copyrights
-
-{{- range $copyright := (ds "config").copyrights -}}
-{{ printf "Copyright © %d-%d [%s](%s)\n" $copyright.year time.Now.Year $copyright.name $copyright.url }}
-{{- end }}
+{{ range $copyright := (ds "config").copyrights }}
+{{ printf "Copyright © %s-%d [%s](%s)\n" $copyright.year time.Now.Year $copyright.name $copyright.url -}}
+{{- end -}}
 {{- else }}
 
 ## Copyright
 
 Copyright © 2021-{{ time.Now.Year }} SR2 Communications Limited
 {{- end }}
-
 {{- if eq (ds "config").license "APACHE2" }}
 
 ## License
