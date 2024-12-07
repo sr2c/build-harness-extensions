@@ -130,9 +130,9 @@ It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
 {{- end }}
 
 {{- if has (ds "config") "include" }}
-{{- range $file := (datasource "config").include -}}
+{{ range $file := (datasource "config").include }}
 {{ (include "includes" $file) }}
-{{- end }}
+{{ end }}
 {{- end -}}
 
 ## Share the Love
