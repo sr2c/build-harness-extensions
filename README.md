@@ -1,9 +1,22 @@
+
+
+
+
+
+
+
+
 <!-- markdownlint-disable -->
+
 # build-harness-extensions
+
+
 [![pipeline status](https://gitlab.com/sr2c/build-harness-extensions/badges/main/pipeline.svg?ignore_skipped=true&style=flat-square)](https://gitlab.com/sr2c/build-harness-extensions/-/pipelines)
 [![latest release](https://gitlab.com/sr2c/build-harness-extensions/-/badges/release.svg?style=flat-square)](https://gitlab.com/sr2c/build-harness-extensions/-/tags)
 [![gitlab stars](https://img.shields.io/gitlab/stars/sr2c/build-harness-extensions?style=flat-square)](https://gitlab.com/sr2c/build-harness-extensions/-/starrers)
 [![gitlab forks](https://img.shields.io/gitlab/forks/sr2c/build-harness-extensions?style=flat-square)](https://gitlab.com/sr2c/build-harness-extensions/-/forks)
+
+  
 <!-- markdownlint-restore -->
 [![SR2 Communications Limited][logo]](https://www.sr2.uk/)
 
@@ -21,6 +34,9 @@
   **
 
 -->
+
+
+
 
 Our extensions to Cloud Posse's
 [build-harness](https://github.com/cloudposse/build-harness).
@@ -40,8 +56,28 @@ Our primary technologies are:
 * Python
 * Terraform (existing Cloud Posse module)
 
+
+
+
 ---
+
+
+
+
+
+
+
 It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
+
+
+
+
+
+
+
+
+
+
 
 ## Usage
 
@@ -114,7 +150,17 @@ export README_DEPS ?= docs/targets.md docs/terraform.md
 lint:
     $(SELF) terraform/install terraform/get-modules terraform/lint \
         terraform/validate tflint
-```<!-- markdownlint-disable -->
+```
+
+
+
+
+
+
+
+
+
+<!-- markdownlint-disable -->
 ## Makefile Targets
 ```text
 Available targets:
@@ -269,11 +315,18 @@ Available targets:
 
 ```
 <!-- markdownlint-restore -->
+
+
+
+
 ## Share the Love
 
 Like this project? Please give it a ★ on
 [our GitLab](https://gitlab.com/sr2c/build-harness-extensions)!
 (it helps us **a lot**)
+
+
+
 
 ## Help
 
@@ -294,6 +347,7 @@ If you don't have an IRC client already, you can get started with the
 [web client](https://web.libera.chat/#sr2).
 This is the best place to talk shop, ask questions, solicit feedback, and work
 together as a community to build on our open source code.
+
 
 ## Contributing
 
@@ -325,9 +379,21 @@ We have adopted the
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 specification for the formatting of commit messages.
 
+
+
+
+
+
 ## Copyright
 
 Copyright © 2021-2024 SR2 Communications Limited
+
+
+
+
+
+
+
 
 ## License
 
@@ -356,6 +422,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
 
+
 ## Trademarks
 
 All other trademarks referenced herein are the property of their respective owners.
@@ -375,20 +442,35 @@ We offer [paid support][website] on all of our projects.
 Check out [our other projects][gitlab], or [hire us][website] to get support
 with using our projects.
 
+
+
 ## Contributors
 
 <!-- markdownlint-disable -->
 |  [![irl][irlxyz_avatar]][irlxyz_homepage]<br/>[irl][irlxyz_homepage] | [![Abel Luck][abelxluck_avatar]][abelxluck_homepage]<br/>[Abel Luck][abelxluck_homepage] |
 |---|---|
 
+
+
   [irlxyz_homepage]: https://gitlab.com/irlxyz
+
+
   [irlxyz_avatar]: https://gitlab.com/uploads/-/system/user/avatar/5895869/avatar.png?width=130
+
+
+
   [abelxluck_homepage]: https://gitlab.com/abelxluck
+
 
   [abelxluck_avatar]: https://secure.gravatar.com/avatar/0f605397e0ead93a68e1be26dc26481a?s=200&amp;d=identicon
 
 
-<!-- markdownlint-restore --><!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+
+
+
+
+<!-- markdownlint-disable -->
   [logo]: https://www.sr2.uk/readme/logo.png
   [website]: https://www.sr2.uk/?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/build-harness-extensions&utm_content=website
   [gitlab]: https://go.sr2.uk/gitlab?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/build-harness-extensions&utm_content=gitlab

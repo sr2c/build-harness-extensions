@@ -1,32 +1,32 @@
-{{- defineDatasource "config" .Env.README_YAML -}}
-{{- defineDatasource "includes" "./" -}}
-{{- $deprecated := has (ds "config") "deprecated" }}
-{{- $translated := has (ds "config") "weblate_component" }}
-{{- $badge_style := "" }}
-{{- if $translated }}
-{{- $badge_style = "flat" }}
-{{- else }}
-{{- $badge_style = "flat-square" }}
-{{- end -}}
+{{ defineDatasource "config" .Env.README_YAML }}
+{{ defineDatasource "includes" "./" }}
+{{ $deprecated := has (ds "config") "deprecated" }}
+{{ $translated := has (ds "config") "weblate_component" }}
+{{ $badge_style := "" }}
+{{ if $translated }}
+{{ $badge_style = "flat" }}
+{{ else }}
+{{ $badge_style = "flat-square" }}
+{{ end }}
 <!-- markdownlint-disable -->
-{{- if $deprecated }}
+{{ if $deprecated }}
 # (deprecated) {{(ds "config").name}}{{ if gt (len (ds "config").name) 23 }}{{ print "\n\n" }}{{ end }}
-{{- else }}
+{{ else }}
 # {{(ds "config").name}}{{ if gt (len (ds "config").name) 34 }}{{ print "\n\n" }}{{ end }}
-{{- end }}
-{{- if $deprecated }}[![deprecated](https://img.shields.io/badge/lifecycle-deprecated-critical?style={{ $badge_style }})](#deprecated){{ end }}
+{{ end }}
+{{ if $deprecated }}[![deprecated](https://img.shields.io/badge/lifecycle-deprecated-critical?style={{ $badge_style }})](#deprecated){{ end }}
 [![pipeline status](https://gitlab.com/{{ (ds "config").gitlab_repo }}/badges/main/pipeline.svg?ignore_skipped=true&style={{ $badge_style }})](https://gitlab.com/{{ (ds "config").gitlab_repo }}/-/pipelines)
 [![latest release](https://gitlab.com/{{ (ds "config").gitlab_repo }}/-/badges/release.svg?style={{ $badge_style }})](https://gitlab.com/{{ (ds "config").gitlab_repo }}/-/tags)
 [![gitlab stars](https://img.shields.io/gitlab/stars/{{ (ds "config").gitlab_repo }}?style={{ $badge_style }})](https://gitlab.com/{{ (ds "config").gitlab_repo }}/-/starrers)
 [![gitlab forks](https://img.shields.io/gitlab/forks/{{ (ds "config").gitlab_repo }}?style={{ $badge_style }})](https://gitlab.com/{{ (ds "config").gitlab_repo }}/-/forks)
-{{- if $translated }}
+{{ if $translated }}
 [![translation status](https://hosted.weblate.org/widget/{{ (ds "config").weblate_component }}/svg-badge.svg)](https://hosted.weblate.org/projects/{{ (ds "config").weblate_component }})
-{{- end }}
-  {{- if has (ds "config") "badges" }}
-    {{- range $badge := (ds "config").badges }}
-    {{- printf " [![%s](%s)](%s)" $badge.name $badge.image $badge.url }}
-  {{- end }}
-{{- end }}
+{{ end }}
+  {{ if has (ds "config") "badges" }}
+    {{ range $badge := (ds "config").badges }}
+    {{ printf " [![%s](%s)](%s)" $badge.name $badge.image $badge.url }}
+  {{ end }}
+{{ end }}
 <!-- markdownlint-restore -->
 [![SR2 Communications Limited][logo]](https://www.sr2.uk/)
 
@@ -46,94 +46,94 @@
 -->
 {{ if has (ds "config") "logo" }}
 ![{{(ds "config").name}}]({{ (ds "config").logo }})
-{{- end -}}
+{{ end }}
 
-{{- if $deprecated }}
+{{ if $deprecated }}
 ## Deprecated
 
-{{- if has (ds "config").deprecated "notice" }}
-  {{- (ds "config").deprecated.notice }}
-{{- else }}
+{{ if has (ds "config").deprecated "notice" }}
+  {{ (ds "config").deprecated.notice }}
+{{ else }}
   This module is no longer actively maintained
-{{- end }}
+{{ end }}
 
 
 {{ if has (ds "config") "description" }}
 ### Historical Description
 
 {{(ds "config").description }}
-{{- end }}
-{{- else }}
-{{- if has (ds "config") "description" }}
+{{ end }}
+{{ else }}
+{{ if has (ds "config") "description" }}
 {{ (ds "config").description }}
 
-{{- end }}
-{{- end }}
+{{ end }}
+{{ end }}
 
 ---
 
-{{- if eq (ds "config").license "APACHE2" }}
+{{ if eq (ds "config").license "APACHE2" }}
 It's 100% Open Source and licensed under the [APACHE2](LICENSE).
-{{- end }}
-{{- if eq (ds "config").license "CC-BY-NC-SA-4.0" }}
+{{ end }}
+{{ if eq (ds "config").license "CC-BY-NC-SA-4.0" }}
 It's 100% Open Source and licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](LICENSE).
 
 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License" src="static/images/cc-by-nc-sa.png" width="150" /></a>
-{{- end }}
-{{- if eq (ds "config").license "MIT" }}
+{{ end }}
+{{ if eq (ds "config").license "MIT" }}
 It's 100% Open Source and licensed under the [MIT](LICENSE).
-{{- end }}
-{{- if eq (ds "config").license "ISC" }}
+{{ end }}
+{{ if eq (ds "config").license "ISC" }}
 It's 100% Open Source and licensed under the [Internet Systems Consortium](LICENSE).
-{{- end }}
-{{- if eq (ds "config").license "GPL3" }}
+{{ end }}
+{{ if eq (ds "config").license "GPL3" }}
 It's 100% Open Source and licensed under the [GNU General Public License](LICENSE).
-{{- end }}
-{{- if eq (ds "config").license "BSD2" }}
+{{ end }}
+{{ if eq (ds "config").license "BSD2" }}
 It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
-{{- end }}
+{{ end }}
 
-{{- if not $deprecated }}
+{{ if not $deprecated }}
 
-{{- if has (ds "config") "screenshots" }}
+{{ if has (ds "config") "screenshots" }}
 ## Screenshots
 
 {{ range $screenshot := (ds "config").screenshots }}
 {{ printf "![%s](%s)\n*%s*" $screenshot.name $screenshot.url $screenshot.description }}{{ end }}
-{{- end }}
-{{- end }}
+{{ end }}
+{{ end }}
 
-{{- if has (ds "config") "introduction" }}
+{{ if has (ds "config") "introduction" }}
 ## Introduction
 
 {{ (ds "config").introduction }}
-{{- end }}
+{{ end }}
 
-{{- if has (ds "config") "usage" }}
+{{ if has (ds "config") "usage" }}
 
 ## Usage
-{{ (ds "config").usage -}}
-{{- end }}
+{{ (ds "config").usage }}
+{{ end }}
 
-{{- if not $deprecated -}}
-{{- if has (ds "config") "quickstart" -}}
+{{ if not $deprecated }}
+{{ if has (ds "config") "quickstart" }}
 
 ## Quick Start
-{{ (ds "config").quickstart -}}
-{{- end }}
+{{ (ds "config").quickstart }}
+{{ end }}
 
-{{- if has (ds "config") "examples" -}}
+{{ if has (ds "config") "examples" }}
 
 ## Examples
 
 {{(ds "config").examples }}
-{{- end }}
+{{ end }}
 
-{{- if has (ds "config") "include" }}
+{{ if has (ds "config") "include" }}
 {{ range $file := (datasource "config").include }}
 {{ (include "includes" $file) }}
 {{ end }}
-{{- end -}}
+{{ end }}
 
 ## Share the Love
 
@@ -141,7 +141,7 @@ Like this project? Please give it a ★ on
 [our GitLab]({{ printf "https://gitlab.com/%s" (ds "config").gitlab_repo}})!
 (it helps us **a lot**)
 
-{{- if has (ds "config") "related" -}}
+{{ if has (ds "config") "related" }}
 
 ## Related Projects
 
@@ -149,8 +149,8 @@ Check out these related projects.
 {{ range $related := (ds "config").related }}
 {{ printf "- [%s](%s) - %s" $related.name $related.url $related.description }}{{ end }}
 
-{{- end}}
-{{- end}}
+{{ end}}
+{{ end}}
 {{ if has (ds "config") "references" }}
 
 ## References
@@ -180,7 +180,7 @@ If you don't have an IRC client already, you can get started with the
 This is the best place to talk shop, ask questions, solicit feedback, and work
 together as a community to build on our open source code.
 
-{{ if not $deprecated -}}
+{{ if not $deprecated }}
 ## Contributing
 
 ### Bug Reports & Feature Requests
@@ -211,7 +211,7 @@ We have adopted the
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 specification for the formatting of commit messages.
 
-{{- if $translated }}
+{{ if $translated }}
 ### Translations
 
 Our translation project is publicly available
@@ -249,21 +249,21 @@ If you want to add a new language, please first have to contact us, either on [I
 by [opening an issue]({{ printf "https://gitlab.com/%s/-/issues" (ds "config").gitlab_repo}}).
 
 ![translation status per language](https://hosted.weblate.org/widget/guardianproject/snaptshot-telegram-bot/multi-blue.svg)
-{{- end }}
-{{- end }}
+{{ end }}
+{{ end }}
 
-{{- if has (ds "config") "copyrights" }}
+{{ if has (ds "config") "copyrights" }}
 ## Copyrights
 {{ range $copyright := (ds "config").copyrights }}
-{{ printf "Copyright © %s-%d [%s](%s)\n" $copyright.year time.Now.Year $copyright.name $copyright.url -}}
-{{- end -}}
-{{- else }}
+{{ printf "Copyright © %s-%d [%s](%s)\n" $copyright.year time.Now.Year $copyright.name $copyright.url }}
+{{ end }}
+{{ else }}
 
 ## Copyright
 
 Copyright © 2021-{{ time.Now.Year }} SR2 Communications Limited
-{{- end }}
-{{- if eq (ds "config").license "APACHE2" }}
+{{ end }}
+{{ if eq (ds "config").license "APACHE2" }}
 
 ## License
 
@@ -289,8 +289,8 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 ```
-{{- end }}
-{{- if eq (ds "config").license "CC-BY-NC-SA-4.0" }}
+{{ end }}
+{{ if eq (ds "config").license "CC-BY-NC-SA-4.0" }}
 
 ## License
 
@@ -311,8 +311,8 @@ This material may only be distributed subject to the terms and conditions set fo
 Distribution of substantively modified versions of this document is prohibited without the explicit permission of the copyright holder.
 
 Distribution of the work or derivative of the work in any standard (paper) book form for commercial purposes is prohibited unless prior permission is obtained from the copyright holder.
-{{- end }}
-{{- if eq (ds "config").license "MIT" }}
+{{ end }}
+{{ if eq (ds "config").license "MIT" }}
 
 ## License
 
@@ -341,8 +341,8 @@ THE SOFTWARE.
 
 Source: <https://opensource.org/licenses/MIT>
 ```
-{{- end }}
-{{- if eq (ds "config").license "ISC" }}
+{{ end }}
+{{ if eq (ds "config").license "ISC" }}
 
 ## License
 
@@ -357,8 +357,8 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 
 Source: <https://opensource.org/licenses/ISC>
 ```
-{{- end }}
-{{- if eq (ds "config").license "GPL3" }}
+{{ end }}
+{{ if eq (ds "config").license "GPL3" }}
 
 ## License
 
@@ -381,8 +381,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
-{{- end }}
-{{- if eq (ds "config").license "BSD2" }}
+{{ end }}
+{{ if eq (ds "config").license "BSD2" }}
 
 ## License
 
@@ -410,7 +410,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
-{{- end }}
+{{ end }}
 
 ## Trademarks
 
@@ -431,31 +431,31 @@ We offer [paid support][website] on all of our projects.
 Check out [our other projects][gitlab], or [hire us][website] to get support
 with using our projects.
 
-{{- if has (datasource "config") "contributors" }}
+{{ if has (datasource "config") "contributors" }}
 
 ## Contributors
 
 <!-- markdownlint-disable -->
 | {{ range $contributor := (ds "config").contributors }}{{ printf " [![%s][%s_avatar]][%s_homepage]<br/>[%s][%s_homepage] |" $contributor.name $contributor.gitlab $contributor.gitlab $contributor.name $contributor.gitlab}}{{ end }}
-|{{- range $contributor := (ds "config").contributors -}}---|{{ end }}
+|{{ range $contributor := (ds "config").contributors }}---|{{ end }}
 
-{{ range $contributor := (ds "config").contributors -}}
-{{- if has $contributor "homepage" }}
+{{ range $contributor := (ds "config").contributors }}
+{{ if has $contributor "homepage" }}
 {{ printf "  [%s_homepage]: %s" $contributor.gitlab $contributor.homepage }}
-{{ else -}}
+{{ else }}
 {{ printf "  [%s_homepage]: https://gitlab.com/%s" $contributor.gitlab $contributor.gitlab }}
-{{ end -}}
+{{ end }}
 {{ if has $contributor "avatar" }}{{ printf "  [%s_avatar]: %s" $contributor.gitlab $contributor.avatar }}
 {{ else if has $contributor "gravatar" }}
 {{ printf "  [%s_avatar]: https://secure.gravatar.com/avatar/%s?s=200&amp;d=identicon" $contributor.gitlab $contributor.gravatar }}
-{{ else -}}
+{{ else }}
 {{ printf "  [%s_avatar]: https://gitlab.com/uploads/-/system/user/avatar/%d/avatar.png?width=130" $contributor.gitlab $contributor.gitlab_id }}
-{{- end }}
+{{ end }}
 {{ end }}
 <!-- markdownlint-restore -->
-{{- end }}
+{{ end }}
 
-{{- $utm_link := printf "%%s?utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" "gitlab" "readme" (ds "config").gitlab_repo "%s" -}}
+{{ $utm_link := printf "%%s?utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" "gitlab" "readme" (ds "config").gitlab_repo "%s" }}
 
 <!-- markdownlint-disable -->
   [logo]: https://www.sr2.uk/readme/logo.png
