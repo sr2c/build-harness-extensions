@@ -31,6 +31,7 @@ Available targets:
   compose/restart                     Restart local dev environment
   compose/top                         Show top for containers
   compose/up                          Start local dev environment (daemonized)
+  depends/%                           Ensure that a command is installed and available in the PATH
   docker/build                        Build docker image
   docker/clean                        Cleanup docker.                     WARNING!!! IT WILL DELETE ALL UNUSED RESOURCES
   docker/clean/containers             Cleanup docker containers.          WARNING!!! IT WILL DELETE ALL UNUSED CONTAINERS
@@ -125,6 +126,7 @@ Available targets:
   readme/init                         Create basic minimalistic .README.md template file
   readme/lint                         Verify the `README.md` is up to date
   semver/export                       Export semver vars
+  skeleton/tf                         Initialise a new Terraform/OpenTofu module project with template files
   slack/notify                        Send webhook notification to slack
   slack/notify/build                  Send notification to slack using "build" template
   slack/notify/deploy                 Send notification to slack using "deploy" template
